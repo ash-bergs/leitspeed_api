@@ -25,7 +25,9 @@ exports.up = function(knex) {
             .notNullable(); 
         tbl.text('username', 128)
             .unique()
-            .notNullable(); 
+            .notNullable();
+        tbl.text('password', 128)
+            .notNullable();
         // this field has no constraints, other than the character limit we passed in (128)
         tbl.text('email', 128); 
     })
