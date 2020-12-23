@@ -40,4 +40,6 @@ Optional fields for a new card are as follows:
 
 '/users/cards'
 
+* '/users/' - GET all users
+Returns a data array containing information about all users (this includes password! Big no-no! Must fix later)
 

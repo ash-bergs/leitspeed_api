@@ -7,6 +7,8 @@
 // File is named with a leading number '01' by convention, because seeds are not time stamped
 //! When done run `knex seed:run` to add the data
 //* Make sure you know the shape of your data! Do not add ids yourself, and keep code clean
+//* If you decide to add more users later - this file can be directly edited to reflect that
+// because of .truncate - everything will be reset, and there will not be duplicates
 //! BUT WAIT - I just realized I didn't add a password field to the users! Let's go back and fix that first. 
 /* ------------------------- How I fixed my mistake ------------------------- */
 // First I ran `knex migrate:rollback', removing the users table I originally created
