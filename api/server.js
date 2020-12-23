@@ -1,9 +1,13 @@
 const express = require("express"); 
 
+const usersRouter = require('./users/users-router'); 
 const server = express(); 
 
 //* use JSON // 
 server.use(express.json()); 
+
+//* "Plug in" the users router 
+server.use('/users', usersRouter); 
 
 //* base endpoint 
 server.get('/', (req, res) => {
