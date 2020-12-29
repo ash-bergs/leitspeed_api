@@ -1,11 +1,14 @@
-//? This instantiates the router that we will export below ? 
+//? This instantiates the router that we will export below ?(is this the correct wording?)
 const router = require('express').Router(); 
 
 //* Imports the connection to the database - can be named whatever 
+// this is what we will call to 'call the database'
 const db = require('../../data/connection'); 
 
 // below are the end points, organized by http method alphabetically 
 // these end points are for CRUD operation on the *USERS* table in the database 
+
+//TODO [🦄] Delete a user 
 
 //* Get all users 
 router.get('/', (req, res) => {
@@ -31,7 +34,11 @@ router.get('/:id', (req, res) => {
             }
         })
         .catch(handleError)
-})
+});
+
+//* Post a new user 
+
+router.post('')
 
 /* --------------------------- Note on Middleware --------------------------- */
 //* We could use a handleError function to handle errors, perhaps logging them, and pass it to the catch clause. 

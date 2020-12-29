@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------------------- */
 /*                               About 01-users                               */
 //! Command `knex seed:make 01-users` was given to create this file
-// seeds are used to prepopulated databases with sample data
+// seeds are used to prepopulate databases with sample data
 // it's a good idea to be in the habit of running `knex migrate:latest` before generating seed files 
 // If there have been no changes, the above command will tell you you're up to date 
 // File is named with a leading number '01' by convention, because seeds are not time stamped

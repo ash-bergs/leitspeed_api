@@ -9,6 +9,7 @@
 // name: Text input for the user's name. Does not have to be unique. Required.
 // username: Text input for a user's chosen handle, required and unique
 // email: Optional text input if a user wishes to give an email address 
+// password: not nullable 
 /* -------------------------------------------------------------------------- */
 
 // UP - the change we want to make to our schema 
