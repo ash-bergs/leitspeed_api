@@ -1,6 +1,7 @@
 const express = require("express"); 
 
 const usersRouter = require('./users/users-router'); 
+const topicsRouter = require('./users/topics-router'); 
 const server = express(); 
 
 //* use JSON // 
@@ -8,6 +9,7 @@ server.use(express.json());
 
 //* "Plug in" the users router 
 server.use('/users', usersRouter); 
+server.use('/topics', topicsRouter); 
 
 //* base endpoint 
 server.get('/', (req, res) => {
