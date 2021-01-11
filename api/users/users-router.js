@@ -2,43 +2,55 @@
 const router = require('express').Router(); 
 
 //* Imports the connection to the database - can be named whatever 
-// this is what we will call to 'call the database'
+//! Now that we have a model in the works, we're going to be getting rid of this direct connection
+//! Instead the connection will come from a SQLite structure model 
 const db = require('../../data/connection'); 
 
-// below are the end points, organized by http method alphabetically 
-// these end points are for CRUD operation on the *USERS* table in the database 
+//* THIS IS THE MODEL CONNECTION, ^ we should refactor the end points using the db above to use the model - a SQL intermediary set of functions 
+const users = require("./users-model"); 
+//* ⬆ this guy is going to be the star going forward 
 
 //TODO [🦄] Delete a user 
 
 //* Get all users 
+//* Sanity checked ✅
 router.get('/', (req, res) => {
-    db('users')
-        // these functions are *promises*
+    users.find()
         .then(users => {
-            res.status(200).json({ data: users }); 
+            res.status(200).json({ data: users}); 
         })
-        .catch(handleError);
+        .catch(handleError); 
 }); 
 
 //* Get user by id {dynamic param}
+//* Sanity checked ✅
 router.get('/:id', (req, res) => {
+    const { id } = req.params; 
 
-    db('users')
-    // Search the users table where this id first occurs, then....
-        .where({ id: req.params.id }).first()
+    users.findById(id)
         .then(user => {
-            if (user) {
-                res.status(200).json({ data: user }); 
-            } else {
-                res.status(404).json({ message: 'User not found' }); 
-            }
+            res.status(200).json({ data: user }); 
         })
-        .catch(handleError)
+        .catch(handleError); 
 });
 
 //* Post a new user 
+router.post('/register', (req, res) => {
+    //? What things does a user *need* to be added successfully?
+    //* name, password, username, email (optional)
+    //TODO - create a piece of middleware that checks for name, username and password 
+    const { name, username, password, email } = req.body; 
 
-router.post('')
+    if (name && username && password) {
+        users.add({name, username, password, email})
+            .then(user => {
+                res.status(201).json({ message: "Registration Successful!", user: user });
+            })
+            .catch(handleError);
+    } else if (!name || !username || !password) {
+        res.status(403).json({ message: "Missing or invalid field entries, username and password required!" })
+    }
+})
 
 /* --------------------------- Note on Middleware --------------------------- */
 //* We could use a handleError function to handle errors, perhaps logging them, and pass it to the catch clause. 
