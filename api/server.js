@@ -1,5 +1,6 @@
 const express = require("express"); 
 
+const cardsRouter = require('./users/cards-router'); 
 const usersRouter = require('./users/users-router'); 
 const topicsRouter = require('./users/topics-router'); 
 const server = express(); 
@@ -7,8 +8,9 @@ const server = express();
 //* use JSON // 
 server.use(express.json()); 
 
-//* "Plug in" the users router 
-server.use('/users', usersRouter); 
+//* "Plug in" the routers here
+server.use('/cards', cardsRouter);
+server.use('/users', usersRouter);  
 server.use('/topics', topicsRouter); 
 
 //* base endpoint 
