@@ -9,7 +9,8 @@
 //* Make sure you know the shape of your data! Do not add ids yourself, and keep code clean
 //* If you decide to add more users later - this file can be directly edited to reflect that
 // because of .truncate - everything will be reset, and there will not be duplicates
-/* ------------------------- How I fixed my mistake ------------------------- */
+
+/* ------------------------- How I fixed my missing password mistake ------------------------- */
 // First I ran `knex migrate:rollback', removing the users table I originally created
 // Then I deleted the migration and created a new one - making sure the password was on there this time 🤦🏻‍♂️
 /* -------------------------------------------------------------------------- */
