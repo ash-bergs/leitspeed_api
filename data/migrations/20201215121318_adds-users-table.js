@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------------------- */
 /*                            About the Users table                           */
 //! Knex command `knex migrate:make create-users-table` was given to create this file
-//* This file serves as a snapshot - meaning it will not be changed after added 
+//* This file serves as a snapshot - meaning it should not be changed after added 
 //* But a rollback can be run to undo the creation of this table - `knex migrate:rollback`
 //! Once completed and ready to add to the database, command `knex migrate:latest` was ran
 //* The shape of the data looks like: 

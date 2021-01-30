@@ -9,6 +9,7 @@ const db = require('../../data/connection');
 //* THIS IS THE MODEL CONNECTION, ^ we should refactor the end points using the db above to use the model - a SQL intermediary set of functions 
 const users = require("./users-model"); 
 //* ⬆ this guy is going to be the star going forward 
+// In short, we call this to call the database
 
 //TODO [🦄] Delete a user 
 
