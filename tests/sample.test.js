@@ -16,6 +16,13 @@ describe('GET /', () => {
     it('has process.env.DB_ENV as "testing"', () => {
         expect(process.env.DB_ENV).toBe('testing'); 
     })
+
+    // DESCRIBE instantiates a test suite, IT instantiates a singular test, was can add several to a DESCRIBE block
+    // This tests the response code to be 200 - aka, a working server 
+    it('returns 200 OK', () => {
+        return request(server).get('/')
+            .expect(200); 
+    })
 })
 
 /* -------------------------------------------------------------------------- */
@@ -46,5 +53,11 @@ describe('GET /', () => {
     ! We install it as a DEV DEPENDENCY 
     To use it, we will require(import) it at the top of our testing file, giving it an easy to use/remember variable name 
     To write a test for the base endpoint (which isn't really anything more than a server status message) we will call SuperTest, and CHAIN ASSERTIONS that we expect to see - like a 200 code! 
+    * It's important to 'sanity check' tests as we go along - make them fail, and make sure they're testing the RIGHT things. 
 */
 /* -------------------------------------------------------------------------- */
+
+//* Note to self: I have added the TESTING object to the knexfile, setting up a destination to a testing db 
+//* I have not run anything to actually create this database yet - and I'm not quite sure where to go next. 
+//? Do I run a command? Or does Jest take care of this in set up and tear down? 
+//! Continue research and guided practice until you can answer this question succinctly 
