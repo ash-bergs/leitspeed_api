@@ -1,8 +1,9 @@
 /* ---------------------------- About knexfile.js --------------------------- */
 //* created using the knex library and knex CLI
 // CLI: knex init
-// contains 3 different configure objects 
-// for 3 different environments - development, staging and production 
+// contains 3 different configure objects on start - development, staging, production 
+// These objects are keys to control the environment the server will run
+// We added a testing key so that we can properly test the endpoints! 
 
 module.exports = {
   development: {
@@ -69,7 +70,3 @@ module.exports = {
   }
 
 };
-
-
-//? DB in github because I failed to add to the gitignore 
-// git rm -r --cached 
