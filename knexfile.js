@@ -23,7 +23,19 @@ module.exports = {
       directory: "./data/seeds",
     },
   },
-
+  testing: {
+    client: 'sqlite3', 
+    connection: {
+      filename: "./data/test.db3",
+    },
+    useNullAsDefault: true, 
+    migrations: {
+      directory: "./data/migrations",
+    }, 
+    seeds: {
+      directory: "./data/seeds",
+    }
+  },
   staging: {
     client: 'postgresql',
     connection: {
@@ -57,3 +69,7 @@ module.exports = {
   }
 
 };
+
+
+//? DB in github because I failed to add to the gitignore 
+// git rm -r --cached 
