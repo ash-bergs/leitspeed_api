@@ -51,5 +51,13 @@ Returns a data array containing information about all users (this includes passw
 ### Things I've learned along the way: 
 
 1. I failed to add my database file (with .db3 extension) to the gitignore at the beginning of the project, as a consequence it was added to the repo on github, which we don't want. 
+
 To fix this I stopped committing any changes to that file specifically, and made sure it was in the .gitignore file
+
 Finally, I cleared the cache (what does this do exactly?), which successfully ignored the db files in the project 
+
+2. Dotenv Package 
+
+When I initially deployed this API on heroku the build was successful, and when opening the App there was the "Up and running..." message of the / route's handler... but that was it. 
+
+Looking at past projects, that were deployed and used, I tried to track down what I did differently to get them to work. I noticed `dotenv` pretty quickly - a package I totally forgot about. 
