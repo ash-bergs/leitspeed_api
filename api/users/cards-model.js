@@ -8,6 +8,7 @@ const db = require("../../data/connection");
 // DELETE a card 
 
 module.exports = {
+    add,
     find, 
     findById
 }
@@ -20,4 +21,12 @@ function findById(id) {
     return db('cards')
         .where({ id })
         .first(); 
+}
+
+function add(card) {
+    return db('cards')
+        .insert(card, 'id')
+            .then(([id]) => {
+                return findById(id); 
+            }); 
 }
