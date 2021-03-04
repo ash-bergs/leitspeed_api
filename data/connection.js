@@ -1,13 +1,11 @@
 const knex = require ('knex'); 
 
 //* Imports the knex configuration we built before
-const knexfile = require('../knexfile'); 
+const config = require('../knexfile'); 
 
 const environment = process.env.DB_ENV || 'development'; 
 
-const config = knexfile[environment]; 
-
-module.exports = knex(config); 
+module.exports = knex(config[environment]); 
 
 /* -------------------------------------------------------------------------- */
 /*                             About connection.js                            */
