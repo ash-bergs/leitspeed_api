@@ -1,4 +1,4 @@
-const server = require("./api/server");
+const server = require("./api/server/server");
 // * bringing dotenv in
 require("dotenv").config();
 //* now switch this to the .env var, brought in by dotenv .config()
