@@ -84,8 +84,7 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
-data/users.db3
-*.db3
+
 
 # dotenv 
 .env
