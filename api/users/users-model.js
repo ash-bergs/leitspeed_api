@@ -3,30 +3,29 @@
 /* The model assists the end points using SQL, these functions will be exported 
    and used in the users-router 
 */
+//testing
 /* -------------------------------------------------------------------------- */
 
-const db = require("../../data/connection"); 
+const db = require("../../data/connection");
 
 module.exports = {
-    add, 
-    find, 
-    findById
-}
+	add,
+	find,
+	findById,
+};
 
 function add(user) {
-    return db('users')
-        .insert(user, 'id')
-        .then(([id]) => {
-            return findById(id); 
-        }); 
+	return db("users")
+		.insert(user, "id")
+		.then(([id]) => {
+			return findById(id);
+		});
 }
 
 function find() {
-    return db('users'); 
+	return db("users");
 }
 
 function findById(id) {
-    return db('users')
-        .where({ id })
-        .first();
+	return db("users").where({ id }).first();
 }
