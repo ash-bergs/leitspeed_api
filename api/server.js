@@ -3,12 +3,11 @@ const express = require("express");
 const cardsRouter = require("./users/cards-router");
 const usersRouter = require("./users/users-router");
 const topicsRouter = require("./users/topics-router");
-const cors = require("cors");
+
 const server = express();
 
 //* use JSON //
 server.use(express.json());
-server.use(cors());
 
 //* "Plug in" the routers here
 server.use("/cards", cardsRouter);
