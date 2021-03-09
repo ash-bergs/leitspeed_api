@@ -1,6 +1,8 @@
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
 const cards = require("./cards-model");
 
+router.use(express.json());
 //* GET all cards
 router.get("/", (req, res) => {
 	cards
