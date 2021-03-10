@@ -1,12 +1,12 @@
 # LeitSpeed API 
-The LeitSpeed App back end. Built with Node and Express.
 
-### Tech Stack 
+The LeitSpeed API is built with NodeJS & the Express framework, and the Knex query-builder. 
+
+## Tech Stack 
 
 Dependencies: 
 - Node 
 - Express 
-- BcryptJS
 - Knex 
 - Sqlite3 
 
@@ -14,50 +14,76 @@ Dev Dependencies:
 - Nodemon 
 - Jest 
 - SuperTest 
-- Cross-Env 
+- Dotenv  
 
-### Database Design 
+## Using the API
 
-[database schema picture here]
+**BASE URL** 
 
-Users Table 
+The api can be accessed via the base url at [https://leitspeed-api.herokuapp.com/](https://leitspeed-api.herokuapp.com/)
 
-Users must provide their name, email, and chosen username. They will be given a unique ID. 
+If the deployment is up, you will receive a simple message - `"Up and running..."`
 
-Cards Table 
+![Base url in Insomnia](https://i.ibb.co/gWpHMGq/leitspeed-base-URL.jpg)
 
-Required fields for a new flashcard are as follows:
-- user_id: A user's id is attached as a foreign key, automatically assigned on the front end 
-- id: Primary key assigned by the database 
-- Front: The text/question the user wants on the front of the card
-- Back: The answer text the user gives for the back of the card 
+## API Endpoints
 
-Optional fields for a new card are as follows: 
-- Notes: User can add additional notes to a card, this is a text input
-- Active: A boolean value indicating the active status of a card. An active card is currently being studied by the student, and appears in review games and 'Study Mode'. Inactive cards will not be actively used in Study Mode. 
-- Public: A boolean value indicating the public status, if a card is public other users can see and add it to their own stacks
+**/CARDS - GET all Cards - endpoint**
+
+The `Cards` database table can be accessed by making a GET request to the [https://leitspeed-api.herokuapp.com/cards](https://leitspeed-api.herokuapp.com/cards) endpoint. 
+
+The response will be an array of objects - each object being an individual card in the database. 
+
+![Cards endpoint in Insomnia](https://i.ibb.co/7y08rcv/leitspeed-cards-URL.jpg)
+
+----
+
+**/CARDS/{id} - GET card by card ID - endpoint**
+
+This API follows RESTful standards, using the `/cards` and `/cards/{id}` when working with one resource and a collection of resources. A card can be requested by its ID (given by the Node/Express server) - if it exists and hasn't been deleted, one JSON object will be delivered in the response. If the card can't be found a 404 will return. 
+
+A card can be accessed by making a GET request to the `https://leitspeed-api.herokuapp.com/cards/` endpoint with the requested card id following the last forward slash. Example: `https://leitspeed-api.herokuapp.com/cards/1` 
+
+![Cards url with id in Insomnia](https://i.ibb.co/2d1n9G7/leitspeed-card-ID.jpg)
+
+----
+
+**/CARDS/ADD-CARD - POST a new card - endpoint** 
+
+To add a new card, make a POST request to the [https://leitspeed-api.herokuapp.com/cards/add-card](https://leitspeed-api.herokuapp.com/cards/add-card) endpoint. 
+
+The request body will pass the new card's information - some of these fields are optional, others are not. 
+
+* ❗ Required fields: 
+    - front: The front of the new flashcard - the question, or whatever format the user wants to use to structure their study. 
+    - back: The back of the card - the answer
+
+* ❓ Optional fields: 
+    - user_id: integer value, this field is a FOREIGN KEY linking to the `Users` database table
+    - notes: text (string) field is where a user can add an additional note to their card, like a memory trick, etc. 
+    - public: boolean value - indicating if the card can be shared with other users 
+    - active: boolean value - indicating if the user is currently studying the card 
+
+The data structure of the request body should look as follows, in JSON format: 
+
+```
+{
+	"user_id": integer, 
+	"front": "text", 
+	"back": "text", 
+	"notes": "text",
+	"active": boolean, 
+	"public": boolean
+}
+```
+![Add-card url in Insomnia](https://i.ibb.co/wBDHSqY/leitspeed-add-Card.jpg)
+
+If the card meets all the requirements and is added to the `Cards` database table, it will respond with a JSON object containing the newly created card. 
 
 
-### Endpoints Under Construction 
 
-'/cards' 
-- Returns all cards in the database - active or inactive 
 
-'/users/cards'
 
-* '/users/' - GET all users
-Returns a data array containing information about all users (this includes password! Big no-no! Must fix later)
+### Database Design Overview
 
-### Things I've learned along the way: 
-
-1. I failed to add my database file (with .db3 extension) to the gitignore at the beginning of the project, as a consequence it was added to the repo on github, which we don't want. 
-
-To fix this I stopped committing any changes to that file specifically, and made sure it was in the .gitignore file
-
-Finally, I cleared the cache (what does this do exactly?), which successfully ignored the db files in the project 
-
-2. Dotenv Package 
-
-When I initially deployed this API on heroku the build was successful, and when opening the App there was the "Up and running..." message of the / route's handler... but that was it. 
-
-Looking at past projects, that were deployed and used, I tried to track down what I did differently to get them to work. I noticed `dotenv` pretty quickly - a package I totally forgot about. 
+🚧 UNDER CONSTRUCTION 🚧

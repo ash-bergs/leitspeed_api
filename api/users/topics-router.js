@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const db = require('../../data/connection'); 
 
-//* Get all users 
+//* Get all topics
 router.get('/', (req, res) => {
     db('topics')
         .then(topics => {
