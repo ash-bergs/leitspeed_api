@@ -42,7 +42,7 @@ The response will be an array of objects - each object being an individual card 
 
 This API follows RESTful standards, using the `/cards` and `/cards/{id}` when working with one resource and a collection of resources. A card can be requested by its ID (given by the Node/Express server) - if it exists and hasn't been deleted, one JSON object will be delivered in the response. If the card can't be found a 404 will return. 
 
-A card can be accessed by making a GET request to the `https://leitspeed-api.herokuapp.com/cards/` endpoint with the requested card id following the last forward slash. Example: `https://leitspeed-api.herokuapp.com/cards/1` 
+A card can be accessed by making a GET request to the `https://leitspeed-api.herokuapp.com/cards/:id` endpoint with the requested card id following the last forward slash. Example: `https://leitspeed-api.herokuapp.com/cards/1` 
 
 ![Cards url with id in Insomnia](https://i.ibb.co/2d1n9G7/leitspeed-card-ID.jpg)
 
@@ -80,8 +80,17 @@ The data structure of the request body should look as follows, in JSON format:
 
 If the card meets all the requirements and is added to the `Cards` database table, it will respond with a JSON object containing the newly created card. 
 
+----
 
+**/{id} - PUT request to UPDATE a card - endpoint** 
 
+To update an existing card, make a PUT request with the card's id injected into the route parameters to the `https://leitspeed-api.herokuapp.com/cards/:id` endpoint. The format must be in JSON (see the example above), and the `id`, `front` and `back` of a card **must** be given (even if they are not changing). 
+
+The server will respond with the newly updated card object. 
+
+![Put request in Insomnia](https://i.ibb.co/hfwd5Yp/leitspeed-update-Card.jpg)
+
+----
 
 
 ### Database Design Overview

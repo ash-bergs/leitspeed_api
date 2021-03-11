@@ -4,7 +4,7 @@
   "description": "The LeitSpeed App back end. Built with Node and Express.",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env DB_ENV=testing jest --watch --verbose --detectOpenHandles",
+    "test": "cross-env DB_ENV=testing jest --watch --verbose",
     "server": "nodemon index.js",
     "start": "node index.js"
   },
