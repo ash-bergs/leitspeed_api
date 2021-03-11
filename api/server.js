@@ -1,8 +1,8 @@
 const express = require("express"); 
 
-const cardsRouter = require('./users/cards-router'); 
-const usersRouter = require('./users/users-router'); 
-const topicsRouter = require('./users/topics-router'); 
+const cardsRouter = require('./routers/cards-router/cards-router'); 
+const usersRouter = require('./routers/users-router'); 
+const topicsRouter = require('./routers/topics-router'); 
 const server = express(); 
 
 //* use JSON // 
