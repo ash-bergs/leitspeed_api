@@ -1,15 +1,20 @@
 const router = require('express').Router(); 
 const cards = require('./cards-model'); 
 
-//* GET all cards 
+
+// ✅ sanity checked
 router.get('/', (req, res) => {
     cards.find()
         .then(cards => {
             res.status(200).json({ data: cards }); 
         })
-        .catch(handleError); 
+        .catch(error => {
+            res.status(500).json({ message: error.message })
+        }); 
 }) 
 
+
+// ✅ sanity checked 
 router.get('/:id', (req, res) => {
     const { id } = req.params;
     // call the database and the function built in the model - THEN use the Promise handling workflow! 
@@ -17,9 +22,12 @@ router.get('/:id', (req, res) => {
         .then(card => {
             res.status(200).json({ data: card }); 
         })
-        .catch(handleError); 
+        .catch(error => {
+            res.status(500).json({ message: error.message })
+        }); 
 })
 
+// ✅ sanity checked 
 router.post('/add-card', (req, res) => {
     // ? I can add the id on here /:id and attach it to the card, can't I? 
     // grab the card information the user submitted in the body 
@@ -28,19 +36,28 @@ router.post('/add-card', (req, res) => {
     // call the db and the ADD function we defined to insert the new card into the Cards table 
     cards.add(card)
         .then(card => {
-             // ? is 201 the correct "created" status? 
             res.status(201).json({ data: card }); 
         })
-        .catch(handleError); 
+        .catch(error => {
+            res.status(500).json({ message: error.message })
+        }); 
 })
 
+// ! PUT endpoint 
+// Put request ends in :id - a route paramter indicating the id of the card we wish to update 
+// ✅ sanity checked 
+router.put('/:id', (req, res) => {
+    const { id } = req.params; 
+    // the cards updates (changes) will be located on the body of the request
+    const changes = req.body; 
 
-
-//TODO SET THIS DAMN FUNCTION UP IN A MODULAR WAY - refator routers to reflect that 
-function handleError(error) {
-    res.status(500).json({ message: error.message }); 
-}
+    cards.update(changes, id)
+        .then(newCard => {
+            res.status(201).json(newCard); 
+        })
+        .catch(error => {
+            res.status(500).json({ message: error.message })
+        }); 
+}) 
 
 module.exports = router; 
-
-//? How can I make a function that lets a user know when a card with a certain ID doesn't exist? 
