@@ -4,12 +4,15 @@ The LeitSpeed App back end. Built with Node and Express.
 
 ### Contributors
 
-| [Harrison Seaborn](https://github.com/HarrisonMS)                                                                                                                 |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [<img src="https://avatars0.githubusercontent.com/u/54726103?s=460&u=8a9bb62c6871e6c533796161be184995bec7523a&v=4" width="200" />](https://github.com/harrisonMS) |
-| [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/harrisonMS)                                                                           |
+| [<img alt="ashley-bergsma" src="https://avatars.githubusercontent.com/u/65979049?v=4&s=117 width=117">](https://github.com/ashley-bergsma) |
+| :----------------------------------------------------------------------------------------------------------------------------------------: |
+|      [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/ashleybergsma89/)      |
+|                        [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/ashley-bergsma)                         |
 
-| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/harrison-seaborn/)
+| [<img alt="HarrisonMS" src="https://avatars.githubusercontent.com/u/54726103?v=4&s=117 width=117">](https://github.com/HarrisonMS) |
+| :--------------------------------------------------------------------------------------------------------------------------------: |
+|  [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/harrison-seaborn)  |
+|                      [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/harrisonMS)                       |
 
 ### Tech Stack
 
