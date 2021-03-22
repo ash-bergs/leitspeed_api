@@ -1,63 +1,77 @@
-# LeitSpeed API 
+# LeitSpeed API
+
 The LeitSpeed App back end. Built with Node and Express.
 
-### Tech Stack 
+### Contributors
 
-Dependencies: 
-- Node 
-- Express 
+| [Harrison Seaborn](https://github.com/HarrisonMS)                                                                                                                 |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [<img src="https://avatars0.githubusercontent.com/u/54726103?s=460&u=8a9bb62c6871e6c533796161be184995bec7523a&v=4" width="200" />](https://github.com/harrisonMS) |
+| [<img src="https://github.com/favicon.ico" width="15"> ](https://github.com/harrisonMS)                                                                           |
+
+| [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="15"> ](https://www.linkedin.com/in/harrison-seaborn/)
+
+### Tech Stack
+
+Dependencies:
+
+- Node
+- Express
 - BcryptJS
-- Knex 
-- Sqlite3 
+- Knex
+- Sqlite3
 
 Dev Dependencies:
-- Nodemon 
-- Jest 
-- SuperTest 
-- Cross-Env 
 
-### Database Design 
+- Nodemon
+- Jest
+- SuperTest
+- Cross-Env
+
+### Database Design
 
 [database schema picture here]
 
-Users Table 
+Users Table
 
-Users must provide their name, email, and chosen username. They will be given a unique ID. 
+Users must provide their name, email, and chosen username. They will be given a unique ID.
 
-Cards Table 
+Cards Table
 
 Required fields for a new flashcard are as follows:
-- user_id: A user's id is attached as a foreign key, automatically assigned on the front end 
-- id: Primary key assigned by the database 
-- Front: The text/question the user wants on the front of the card
-- Back: The answer text the user gives for the back of the card 
 
-Optional fields for a new card are as follows: 
+- user_id: A user's id is attached as a foreign key, automatically assigned on the front end
+- id: Primary key assigned by the database
+- Front: The text/question the user wants on the front of the card
+- Back: The answer text the user gives for the back of the card
+
+Optional fields for a new card are as follows:
+
 - Notes: User can add additional notes to a card, this is a text input
-- Active: A boolean value indicating the active status of a card. An active card is currently being studied by the student, and appears in review games and 'Study Mode'. Inactive cards will not be actively used in Study Mode. 
+- Active: A boolean value indicating the active status of a card. An active card is currently being studied by the student, and appears in review games and 'Study Mode'. Inactive cards will not be actively used in Study Mode.
 - Public: A boolean value indicating the public status, if a card is public other users can see and add it to their own stacks
 
+### Endpoints Under Construction
 
-### Endpoints Under Construction 
+'/cards'
 
-'/cards' 
-- Returns all cards in the database - active or inactive 
+- Returns all cards in the database - active or inactive
 
 '/users/cards'
 
-* '/users/' - GET all users
-Returns a data array containing information about all users (this includes password! Big no-no! Must fix later)
+- '/users/' - GET all users
+  Returns a data array containing information about all users (this includes password! Big no-no! Must fix later)
 
-### Things I've learned along the way: 
+### Things I've learned along the way:
 
-1. I failed to add my database file (with .db3 extension) to the gitignore at the beginning of the project, as a consequence it was added to the repo on github, which we don't want. 
+1. I failed to add my database file (with .db3 extension) to the gitignore at the beginning of the project, as a consequence it was added to the repo on github, which we don't want.
 
 To fix this I stopped committing any changes to that file specifically, and made sure it was in the .gitignore file
 
-Finally, I cleared the cache (what does this do exactly?), which successfully ignored the db files in the project 
+Finally, I cleared the cache (what does this do exactly?), which successfully ignored the db files in the project
 
-2. Dotenv Package 
+2. Dotenv Package
 
-When I initially deployed this API on heroku the build was successful, and when opening the App there was the "Up and running..." message of the / route's handler... but that was it. 
+When I initially deployed this API on heroku the build was successful, and when opening the App there was the "Up and running..." message of the / route's handler... but that was it.
 
-Looking at past projects, that were deployed and used, I tried to track down what I did differently to get them to work. I noticed `dotenv` pretty quickly - a package I totally forgot about. 
+Looking at past projects, that were deployed and used, I tried to track down what I did differently to get them to work. I noticed `dotenv` pretty quickly - a package I totally forgot about.
