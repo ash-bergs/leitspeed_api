@@ -1,7 +1,6 @@
 //? This instantiates the router that we will export below ?(is this the correct wording?)
 const router = require('express').Router(); 
-
-
+const bcrypt = require('bcrypt'); 
 const users = require("./users-model"); 
 //* ⬆ this guy is going to be the star going forward 
 // In short, we call this to call the database
@@ -36,13 +35,17 @@ router.post('/register', (req, res) => {
     //* name, password, username, email (optional)
     //TODO - create a piece of middleware that checks for name, username and password 
     const { name, username, password, email } = req.body; 
+    // rounds - i.e. times the password will be hashed 
+    const rounds = process.env.BCRYPT_ROUNDS || 4; 
 
     if (name && username && password) {
-        users.add({name, username, password, email})
+        users.add({name, username, password: bcrypt.hashSync(password, rounds), email})
             .then(user => {
-                res.status(201).json({ message: "Registration Successful!", user: user });
+                res.status(201).json({ message: `Welcome back ${username}` });
             })
-            .catch(handleError);
+            .catch(error => {
+                res.status(500).json({ message: error }); 
+            });
     } else if (!name || !username || !password) {
         res.status(403).json({ message: "Missing or invalid field entries, username and password required!" })
     }
