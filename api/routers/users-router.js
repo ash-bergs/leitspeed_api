@@ -5,6 +5,15 @@ const users = require("./users-model");
 //* ⬆ this guy is going to be the star going forward 
 // In short, we call this to call the database
 
+// passport setup 
+// passport core
+const passport = require('passport');
+// external function we defined in the passport-config file
+//const initializePassport = require('../../passport-config');
+// calling that function and passing in passport variable  
+//initializePassport(passport);
+
+
 //TODO [🦄] Delete a user 
 
 //* Get all users 
