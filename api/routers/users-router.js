@@ -1,17 +1,18 @@
-//? This instantiates the router that we will export below ?(is this the correct wording?)
 const router = require('express').Router(); 
 const bcrypt = require('bcrypt'); 
 const users = require("./users-model"); 
-//* ⬆ this guy is going to be the star going forward 
-// In short, we call this to call the database
 
 // passport setup 
+// ? I'm not sure if this is the right place to be doing this. Should passport be set up in the server.js file?
 // passport core
-const passport = require('passport');
-// external function we defined in the passport-config file
-//const initializePassport = require('../../passport-config');
-// calling that function and passing in passport variable  
-//initializePassport(passport);
+// const passport = require('passport');
+// // external function we defined in the passport-config file
+// const initializePassport = require('../../passport-config');
+// // calling that function and passing in passport variable  
+// initializePassport(passport, username => {
+//     // passing in the findByUsername function here
+//     users.findByUsername(username)
+// });
 
 
 //TODO [🦄] Delete a user 
@@ -38,6 +39,21 @@ router.get('/:id', (req, res) => {
         .catch(handleError); 
 });
 
+//? find by username - to be used for authentication 
+// ? This function isn't working how I want it to. Problem might be in the model
+// ? Or I'm grabbing the username (or thinking of the :username parameter wrong entirely) and need to isolate it more
+router.get('/:username', (req, res) => {
+    const { username } = req.params; 
+
+    users.findByUsername(username)
+        .then(user => {
+            res.status(200).json({ data: user }); 
+        })
+        .catch(error => {
+            res.status(404).json({ message: error.message }); 
+        })
+})
+
 //* Post a new user 
 router.post('/register', (req, res) => {
     //? What things does a user *need* to be added successfully?
@@ -50,7 +66,7 @@ router.post('/register', (req, res) => {
     if (name && username && password) {
         users.add({name, username, password: bcrypt.hashSync(password, rounds), email})
             .then(user => {
-                res.status(201).json({ message: `Welcome back ${username}` });
+                res.status(201).json({ message: `Welcome ${username}` });
             })
             .catch(error => {
                 res.status(500).json({ message: error }); 
