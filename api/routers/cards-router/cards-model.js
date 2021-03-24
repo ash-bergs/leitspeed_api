@@ -12,7 +12,7 @@ module.exports = {
     add,
     find, 
     findById, 
-    update
+    update, 
 }
 
 function find() {

@@ -10,7 +10,8 @@ const db = require("../../data/connection");
 module.exports = {
     add, 
     find, 
-    findById
+    findById, 
+    findByUsername
 }
 
 function add(user) {
@@ -29,4 +30,10 @@ function findById(id) {
     return db('users')
         .where({ id })
         .first();
+}
+
+function findByUsername(username) {
+    return db('users')
+        .where({ username })
+        .first(); 
 }
