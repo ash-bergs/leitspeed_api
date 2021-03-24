@@ -1,7 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy; 
 const bcrypt = require('bcrypt'); 
 
-function initialize(passport, getUser) {
+function initialize(passport, getUser, getUserById) {
     const authenticateUser = async (username, password, done) => {
         // ? I'm not sure what to do with this function... getUser
         // ? Can i use the model's .find function and match for username??
@@ -30,8 +30,11 @@ function initialize(passport, getUser) {
         }
     }
     passport.use(new LocalStrategy(authenticateUser));
-    passport.serializeUser((user, done) => { });
-    passport.deserializeUser((id, done) => { });
+    passport.serializeUser((user, done) => done(null, user.id));
+    passport.deserializeUser((id, done) => {
+        //! not sure where this getUserById function comes into play... findByid in the model????
+        return done(null, getUserById(id))
+    });
 }
 
 module.exports = initialize; 
