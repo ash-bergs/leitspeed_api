@@ -1,12 +1,14 @@
 const LocalStrategy = require('passport-local').Strategy; 
 const bcrypt = require('bcrypt'); 
 
-function initialize(passport, getUserByUsername) {
-    const authenticateUser = (username, password, done) => {
-        //! this function (getUserbyUsername) is passed in, still needs to be built
+function initialize(passport, getUser) {
+    const authenticateUser = async (username, password, done) => {
+        // ? I'm not sure what to do with this function... getUser
+        // ? Can i use the model's .find function and match for username??
         // following this tutorial: https://www.youtube.com/watch?v=-RCnNyD0L-s
-        const user = getUserByUsername(username)
+        const user = getUser(username)
         if (user == null) {
+            // message will be displayed through the failureFlash property in the login route
             return done(null, false, { message: "No user with that username found" })
         }
 
@@ -27,7 +29,7 @@ function initialize(passport, getUserByUsername) {
             return done(e)
         }
     }
-    passport.use(new LocalStrategy(), authenticateUser);
+    passport.use(new LocalStrategy(authenticateUser));
     passport.serializeUser((user, done) => { });
     passport.deserializeUser((id, done) => { });
 }

@@ -32,6 +32,7 @@ function findById(id) {
         .first();
 }
 
+//TODO (ash branch: 'fix/authentication-passportJS') fix or purge
 function findByUsername(username) {
     return db('users')
         .where({ username })
