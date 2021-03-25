@@ -5,35 +5,36 @@
 */
 /* -------------------------------------------------------------------------- */
 
-const db = require("../../data/connection"); 
+const db = require("../../data/connection");
 
 module.exports = {
-    add, 
-    find, 
-    findById, 
-    findByUsername
-}
+	add,
+	find,
+	findById,
+	findByUsername,
+	findByGoogleId,
+};
 
 function add(user) {
-    return db('users')
-        .insert(user, 'id')
-        .then(([id]) => {
-            return findById(id); 
-        }); 
+	return db("users")
+		.insert(user, "id")
+		.then(([id]) => {
+			return findById(id);
+		});
 }
 
 function find() {
-    return db('users'); 
+	return db("users");
 }
 
 function findById(id) {
-    return db('users')
-        .where({ id })
-        .first();
+	return db("users").where({ id }).first();
+}
+
+function findByGoogleId(id) {
+	return db("users").where({ googleId: id }).first();
 }
 
 function findByUsername(username) {
-    return db('users')
-        .where({ username })
-        .first(); 
+	return db("users").where({ username }).first();
 }
