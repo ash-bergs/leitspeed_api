@@ -15,17 +15,7 @@ const passport = require('passport');
 const flash = require('express-flash'); 
 const session = require('express-session'); 
 const initializePassport = require('../passport-config'); 
-
-// I know that the find function on the users-model returns an array of users... 
-// I might need to further filter upon return 
-initializePassport(
-    passport, 
-    username => users.find(user => user.username === username), 
-    // id for the deserializeUser function in passport-config.js
-    id => users.findById(id))
-
-// helper functions to check Passport authentication status 
-//TODO move these to their own file and import them (clean code!)
+initializePassport(passport);
 
 const cardsRouter = require('./routers/cards-router/cards-router'); 
 const usersRouter = require('./routers/users-router'); 
@@ -45,6 +35,8 @@ server.use(session({
     saveUninitialized: false
 })); 
 // initialize is a function inside Passport library - see thread: https://stackoverflow.com/questions/46644366/what-is-passport-initialize-nodejs-express
+
+
 server.use(passport.initialize()); 
 // configures passport to use express-sessions config object 
 server.use(passport.session());

@@ -27,22 +27,6 @@ router.get('/:id', (req, res) => {
         .catch(handleError); 
 });
 
-//? find by username - to be used for authentication 
-// ? This function isn't working how I want it to. Problem might be in the model
-// ? Or I'm grabbing the username (or thinking of the :username parameter wrong entirely) and need to isolate it more
-//TODO Figure this motherfucker out, or get rid of it. Not currently being using by Passport, so not necessary
-// router.get('/:username', (req, res) => {
-//     const { username } = req.params; 
-    
-//     users.findByUsername(username)
-//         .then(user => {
-//             res.status(200).json({ data: user }); 
-//         })
-//         .catch(error => {
-//             res.status(404).json({ message: error.message }); 
-//         })
-// })
-
 //* Post a new user 
 router.post('/register', (req, res) => {
     //? What things does a user *need* to be added successfully?
