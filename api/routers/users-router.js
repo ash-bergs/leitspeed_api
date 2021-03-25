@@ -1,19 +1,7 @@
 const router = require('express').Router(); 
 const bcrypt = require('bcrypt'); 
+const passport = require('passport');
 const users = require("./users-model"); 
-
-// passport setup 
-// ? I'm not sure if this is the right place to be doing this. Should passport be set up in the server.js file?
-// passport core
-// const passport = require('passport');
-// // external function we defined in the passport-config file
-// const initializePassport = require('../../passport-config');
-// // calling that function and passing in passport variable  
-// initializePassport(passport, username => {
-//     // passing in the findByUsername function here
-//     users.findByUsername(username)
-// });
-
 
 //TODO [🦄] Delete a user 
 
@@ -39,21 +27,6 @@ router.get('/:id', (req, res) => {
         .catch(handleError); 
 });
 
-//? find by username - to be used for authentication 
-// ? This function isn't working how I want it to. Problem might be in the model
-// ? Or I'm grabbing the username (or thinking of the :username parameter wrong entirely) and need to isolate it more
-router.get('/:username', (req, res) => {
-    const { username } = req.params; 
-
-    users.findByUsername(username)
-        .then(user => {
-            res.status(200).json({ data: user }); 
-        })
-        .catch(error => {
-            res.status(404).json({ message: error.message }); 
-        })
-})
-
 //* Post a new user 
 router.post('/register', (req, res) => {
     //? What things does a user *need* to be added successfully?
@@ -75,6 +48,23 @@ router.post('/register', (req, res) => {
         res.status(403).json({ message: "Missing or invalid field entries, username and password required!" })
     }
 })
+
+/* ------------------------------- About Login ------------------------------ */
+/*
+Passport is essentially another piece of middleware, like Express.. 
+If It's set up in server.js I need to pass Passport to this users router 
+in the login POST route I'll have to call the local strategy 
+*/
+/* -------------------------------------------------------------------------- */
+
+router.post('/login', passport.authenticate('local', {
+    // a list of options that we want to modify 
+    successRedirect: '/', 
+    failureRedirect: '/login', 
+    failureFlash: true
+}))
+
+
 
 /* --------------------------- Note on Middleware --------------------------- */
 //* We could use a handleError function to handle errors, perhaps logging them, and pass it to the catch clause. 
