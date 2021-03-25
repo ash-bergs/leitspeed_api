@@ -1,16 +1,19 @@
 # LeitSpeed API
 
+<div id="top"></div>
+
+## Table of Contents
+
+### User registration and login
+
+- Endpoints that do _**NOT**_ require authentication (Not Protected):
+
+| Requests                                    | Endpoints                            | Description                                                                 |
+| ------------------------------------------- | ------------------------------------ | --------------------------------------------------------------------------- |
+| <a href="#baseUrl">GET Base URL</a>         | https://leitspeed-api.herokuapp.com/ | Attach endpoints to the end of the base URL in order to make HTTP Requests. |
+| <a href="#googleLogin">GET google login</a> | /auth/google                         | <b>GET</b> request to register and login new user useing Google email       |
+
 The LeitSpeed API is built with NodeJS & the Express framework, and the Knex query-builder.
-
-## Contributors
-
-| [<img alt="ashley-bergsma" src="https://avatars.githubusercontent.com/u/65979049?v=4&s=117 width=117">](https://github.com/ashley-bergsma) |
-| :----------------------------------------------------------------------------------------------------------------------------------------: |
-|                                            [ashley-bergsma](https://github.com/ashley-bergsma)                                             |
-
-| [<img alt="HarrisonMS" src="https://avatars.githubusercontent.com/u/54726103?v=4&s=117 width=117">](https://github.com/HarrisonMS) |
-| :--------------------------------------------------------------------------------------------------------------------------------: |
-|                                            [HarrisonMS](https://github.com/HarrisonMS)                                             |
 
 ## Tech Stack
 
@@ -30,6 +33,8 @@ Dev Dependencies:
 
 ## Using the API
 
+<div id="baseUrl"></div>
+
 **BASE URL**
 
 The api can be accessed via the base url at [https://leitspeed-api.herokuapp.com/](https://leitspeed-api.herokuapp.com/)
@@ -37,6 +42,16 @@ The api can be accessed via the base url at [https://leitspeed-api.herokuapp.com
 If the deployment is up, you will receive a simple message - `"Up and running..."`
 
 ![Base url in Insomnia](https://i.ibb.co/gWpHMGq/leitspeed-base-URL.jpg)
+
+## Auth endpoints
+
+<div id="googleLogin"></div>
+
+**[GET] Login For Google User**
+
+The `/auth/google` GET request to the [https://leitspeed-api.herokuapp.com/auth/google](https://leitspeed-api.herokuapp.com/auth/google) endpoint.
+
+![goole login pop up window](https://i.stack.imgur.com/N5v1U.png)
 
 ## API Endpoints
 
@@ -109,3 +124,13 @@ The server will respond with the newly updated card object.
 ### Database Design Overview
 
 🚧 UNDER CONSTRUCTION 🚧
+
+## Contributors
+
+| [<img alt="ashley-bergsma" src="https://avatars.githubusercontent.com/u/65979049?v=4&s=117 width=117">](https://github.com/ashley-bergsma) |
+| :----------------------------------------------------------------------------------------------------------------------------------------: |
+|                                            [ashley-bergsma](https://github.com/ashley-bergsma)                                             |
+
+| [<img alt="HarrisonMS" src="https://avatars.githubusercontent.com/u/54726103?v=4&s=117 width=117">](https://github.com/HarrisonMS) |
+| :--------------------------------------------------------------------------------------------------------------------------------: |
+|                                            [HarrisonMS](https://github.com/HarrisonMS)                                             |
