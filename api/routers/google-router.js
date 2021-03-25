@@ -3,12 +3,12 @@ var router = express.Router();
 var auth = require("../../passport-google");
 
 // GET root page
-router.get("/", function (request, response) {
+router.get("/", (request, response) => {
 	response.render("index", { user: request.user });
 });
 
 // GET login page
-router.get("/login", function (request, response) {
+router.get("/login", (request, response) => {
 	// response.render("login", { user: request.user });
 	console.log(response);
 	response.redirect("https://leitspeed-fe.vercel.app/login");
@@ -26,14 +26,15 @@ router.get(
 	auth.passport.authenticate("google", {
 		failureRedirect: "/login",
 	}),
-	function (request, response) {
+	(request, response) => {
+		console.log("req object++++++++++++++++++++++++", request.authInfo);
 		// Authenticated successfully
 		response.redirect("https://leitspeed-fe.vercel.app/");
 	}
 );
 
 // GET logout route - will sign person out of session
-router.get("/logout", function (request, response) {
+router.get("/logout", (request, response) => {
 	request.logout();
 	response.redirect("/");
 });

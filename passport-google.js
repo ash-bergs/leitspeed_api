@@ -29,13 +29,13 @@ passport.use(
 				name: profile.name.givenName,
 				username: profile.name.familyName,
 			};
-			console.log("-------------------New user", newUser);
+			// console.log("-------------------New user", newUser);
 			// Query the database to find user record associated with this
 			// google profile, then pass that object to done callback
 			Users.findByGoogleId(profile.id).then((id) => {
-				console.log("+++++++++++++++++++", id);
+				// console.log("+++++++++++++++++++", id);
 				if (id) {
-					return done(null, profile);
+					return done(null, profile, accessToken);
 				} else {
 					Users.add(newUser).then((id) => {
 						return done(null, profile);
