@@ -1,33 +1,49 @@
 //* all authentication routes (via passport) live here - for the time being Google is being used at the only 'strategy'
 
-//* create an instance of an express router 
-const express = require('express');
-const router = express.Router(); 
+//* create an instance of an express router
+const express = require("express");
+const router = express.Router();
+const googleAuth = require("../../passport-google");
 
-// base 
-router.get('/', (req, res) => {
-    res.render('index')
-})
+router.get("/login", (request, response) => {
+	// response.render("login", { user: request.user });
+	console.log(response);
+	response.redirect("https://leitspeed-fe.vercel.app/login");
+});
 
-// auth login 
-router.get('/login', (req, res) => {
-    // ? at the point, if a user were to login, the desired behavior would be to send them to the dashboard - how to implement that here? 
-    // it seems more like a front end job...
-    res.render('login'); 
-})
+// GET route for when you click on login - passport authenticates through google
+router.get(
+	"/google",
+	googleAuth.passport.authenticate("google", {
+		scope: ["openid email profile"],
+	})
+);
 
-// logout 
-router.get('/logout', (req, res) => {
-    // set up
-    // handle with passport
-    res.send("logging out");
-})
+// If successful auth - redirects to home page, if not - redirects to /login
+router.get(
+	"/google/callback",
+	googleAuth.passport.authenticate("google", {
+		failureRedirect: "/login",
+	}),
+	(request, response) => {
+		console.log("req object++++++++++++++++++++++++", request.authInfo);
+		// Authenticated successfully
+		response.redirect("https://leitspeed-fe.vercel.app/");
+	}
+);
 
+// GET logout route - will sign person out of session
+router.get("/logout", (request, response) => {
+	request.logout();
+	response.redirect("/https://leitspeed-fe.vercel.app/");
+});
 
-router.get('/google', (req, res) => {
-    // set up 
-    // handle with passport 
-    res.send("logging in with google");
-})
+// Route middleware to ensure user is authenticated.
+function ensureAuthenticated(request, response, next) {
+	if (request.isAuthenticated()) {
+		return next();
+	}
+	response.redirect("/login");
+}
 
-module.exports = router; 
+module.exports = router;

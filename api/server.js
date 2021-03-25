@@ -13,12 +13,12 @@ const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const path = require("path");
 const auth = require("../passport-google");
-const googleRouter = require("./routers/google-router");
+// const googleRouter = require("./routers/google-router");
 // //* setting view engine for ejs?? this is for the sake of learning passport and may be removed
 
 // //* changed ejs to hbs already had it built out
-server.set("view engine", "hbs");
-server.set("views", path.join(__dirname, "views"));
+server.set("view-engine", "ejs");
+// server.set("views", path.join(__dirname, "views"));
 
 server.use(cookieParser());
 server.use(
@@ -34,9 +34,9 @@ server.use(auth.passport.initialize());
 server.use(auth.passport.session());
 
 // Set static files to folder /public
-server.use(express.static(__dirname + "/public"));
+// server.use(express.static(__dirname + "/public"));
 
-server.use("/", googleRouter);
+// server.use("/", authRouter);
 
 //* "Plug in" the routers here
 server.use("/auth", authRouter);
