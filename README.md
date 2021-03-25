@@ -46,6 +46,7 @@ If the deployment is up, you will receive a simple message - `"Up and running...
 ## Auth endpoints
 
 <div id="googleLogin"></div>
+<a href="#top">Return to the top</a>
 
 **[GET] Login For Google User**
 
