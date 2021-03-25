@@ -19,7 +19,7 @@ router.get(
 	})
 );
 
-// If successful auth - redirects to home page, if not - redirects to /login
+//* If successful auth - redirects to home page, if not - redirects to /login
 router.get(
 	"/google/callback",
 	googleAuth.passport.authenticate("google", {
@@ -27,23 +27,17 @@ router.get(
 	}),
 	(request, response) => {
 		console.log("req object++++++++++++++++++++++++", request.authInfo);
-		// Authenticated successfully
+		//* Authenticated successfully redirect home page authInfo holds the auth token sent by google need to send this to the front end for authorization
+
 		response.redirect("https://leitspeed-fe.vercel.app/");
 	}
 );
 
-// GET logout route - will sign person out of session
+// *GET logout route - will sign person out of session currently points to hard code dashboard. Prob need to add env file for frontend url
+
 router.get("/logout", (request, response) => {
 	request.logout();
 	response.redirect("/https://leitspeed-fe.vercel.app/");
 });
-
-// Route middleware to ensure user is authenticated.
-function ensureAuthenticated(request, response, next) {
-	if (request.isAuthenticated()) {
-		return next();
-	}
-	response.redirect("/login");
-}
 
 module.exports = router;

@@ -18,7 +18,9 @@ const initializePassport = require("../passport-config");
 const googleAuth = require("../passport-google");
 initializePassport(passport);
 
+//*google auth routes are on authRouter
 const authRouter = require("./routers/auth-router");
+
 const cardsRouter = require("./routers/cards-router/cards-router");
 const usersRouter = require("./routers/users-router");
 const topicsRouter = require("./routers/topics-router");
@@ -39,7 +41,9 @@ server.use(
 	})
 );
 
+//* there is probably a better way to initialize or use the local and google stategies
 server.use(googleAuth.passport.initialize());
+//*google auth initialization ^^^^^
 // initialize is a function inside Passport library - see thread: https://stackoverflow.com/questions/46644366/what-is-passport-initialize-nodejs-express
 
 server.use(passport.initialize());

@@ -9,6 +9,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((obj, done) => {
+	//* may need to actually do something in both serialize and deserailize user and make calls to the data base. Things to look into***
 	// Users.findById(obj, done);
 	done(null, obj);
 });
@@ -30,8 +31,9 @@ passport.use(
 				username: profile.name.familyName,
 			};
 			// console.log("-------------------New user", newUser);
-			// Query the database to find user record associated with this
-			// google profile, then pass that object to done callback
+			//* Query the database to find user record associated with this
+			//* google profile, then pass that object to done callback passing the token down as well on found profile probably need to do the same on new user
+
 			Users.findByGoogleId(profile.id).then((id) => {
 				// console.log("+++++++++++++++++++", id);
 				if (id) {
