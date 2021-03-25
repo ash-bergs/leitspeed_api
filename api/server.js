@@ -17,7 +17,7 @@ const auth = require("../passport-google");
 // //* setting view engine for ejs?? this is for the sake of learning passport and may be removed
 
 // //* changed ejs to hbs already had it built out
-server.set("view-engine", "ejs");
+// server.set("view-engine", "ejs");
 // server.set("views", path.join(__dirname, "views"));
 
 server.use(cookieParser());
