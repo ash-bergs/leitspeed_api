@@ -15,8 +15,10 @@ const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
 const initializePassport = require("../passport-config");
+const googleAuth = require("../passport-google");
 initializePassport(passport);
 
+const authRouter = require("./routers/auth-router");
 const cardsRouter = require("./routers/cards-router/cards-router");
 const usersRouter = require("./routers/users-router");
 const topicsRouter = require("./routers/topics-router");
@@ -36,6 +38,8 @@ server.use(
 		saveUninitialized: false,
 	})
 );
+
+server.use(googleAuth.passport.initialize());
 // initialize is a function inside Passport library - see thread: https://stackoverflow.com/questions/46644366/what-is-passport-initialize-nodejs-express
 
 server.use(passport.initialize());
@@ -43,6 +47,7 @@ server.use(passport.initialize());
 server.use(passport.session());
 
 //* "Plug in" the routers here
+server.use("/auth", authRouter);
 server.use("/cards", cardsRouter);
 server.use("/users", usersRouter);
 server.use("/topics", topicsRouter);
