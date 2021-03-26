@@ -20,11 +20,11 @@ router.get(
 router.get(
 	"/google/callback",
 	passport.authenticate("google", {
-		failureRedirect: "/login",
+		failureRedirect: process.env.FRONTEND_BASE_URL + "/login",
 	}),
 	(request, response) => {
 		//* Authenticated successfully redirect home page authInfo holds the auth token sent by google need to send this to the front end for authorization
-		response.redirect("https://leitspeed-fe.vercel.app/");
+		response.redirect(process.env.FRONTEND_BASE_URL);
 	}
 );
 
@@ -32,7 +32,7 @@ router.get(
 
 router.get("/logout", (request, response) => {
 	request.logout();
-	response.redirect("/https://leitspeed-fe.vercel.app/");
+	response.redirect(process.env.FRONTEND_BASE_URL + "/login");
 });
 
 //** Local login routes */
@@ -44,12 +44,12 @@ If It's set up in server.js I need to pass Passport to this users router
 in the login POST route I'll have to call the local strategy 
 */
 /* -------------------------------------------------------------------------- */
-
+console.log(process.env.FRONTEND_BASE_URL + "/login");
 router.post(
 	"/login",
 	passport.authenticate("local", {
-		successRedirect: "/",
-		failureRedirect: "/login",
+		successRedirect: process.env.FRONTEND_BASE_URL,
+		failureRedirect: process.env.FRONTEND_BASE_URL + "/login",
 		failureFlash: true,
 	})
 );
