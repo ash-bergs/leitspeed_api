@@ -31,7 +31,7 @@ const server = express();
 
 //* use JSON //
 server.use(express.json());
-server.set("view-engine", "ejs");
+// server.set("view-engine", "ejs");
 server.use(express.urlencoded({ extended: false }));
 server.use(flash());
 server.use(
@@ -59,45 +59,44 @@ server.use("/topics", topicsRouter);
 
 // adding to the spaghetti code with some shot-in-the-dark endpoints to test passport
 // GET register
-//* the REGISTER end points seem to be working! a user is added with a hashed password
-server.get("/register", (req, res) => {
-	res.render("register.ejs");
-});
+// //* the REGISTER end points seem to be working! a user is added with a hashed password
+// server.get("/register", (req, res) => {
+// 	res.render("register.ejs");
+// });
 
-server.post("/register", async (req, res) => {
-	try {
-		const hashedPassword = await bcrypt.hash(req.body.password, 10);
-		users.add({
-			name: req.body.name,
-			username: req.body.username,
-			password: hashedPassword,
-			email: req.body.email,
-		});
-		res.redirect("/login");
-	} catch {
-		res.redirect("/register");
-	}
-});
+// server.post("/register", async (req, res) => {
+// 	try {
+// 		const hashedPassword = await bcrypt.hash(req.body.password, 10);
+// 		users.add({
+// 			name: req.body.name,
+// 			username: req.body.username,
+// 			password: hashedPassword,
+// 			email: req.body.email,
+// 		});
+// 		res.redirect("/login");
+// 	} catch {
+// 		res.redirect("/register");
+// 	}
+// });
 
-//TODO now... to tackle login
-server.get("/login", (req, res) => {
-	res.render("login.ejs");
-});
+// //TODO now... to tackle login
+// server.get("/login", (req, res) => {
+// 	res.render("login.ejs");
+// });
 
 // we'll call passport to handle a login! see passport-config if curious what it's up to
-server.post(
-	"/login",
-	passport.authenticate("local", {
-		successRedirect: "/",
-		failureRedirect: "/login",
-		failureFlash: true,
-	})
-);
+// server.post(
+// 	"/login",
+// 	passport.authenticate("local", {
+// 		successRedirect: "/",
+// 		failureRedirect: "/login",
+// 		failureFlash: true,
+// 	})
+// );
 
 //* base endpoint
 server.get("/", (req, res) => {
-	res.render("index.ejs");
-	//res.status(200).json({ message: "Up and Running..."});
+	res.status(200).json({ message: "Up and Running..." });
 });
 
 module.exports = server;
