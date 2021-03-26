@@ -23,27 +23,26 @@ router.get(
 	passport.authenticate("google", {
 		failureRedirect: process.env.FRONTEND_BASE_URL + "/login",
 	}),
-	(request, response) => {
-		//* Authenticated successfully redirect home page request.authInfo holds the auth token sent by google need to send this to the front end for authorization
-		const token = request.authInfo;
-		response.redirect(
+	(req, res) => {
+		//* Authenticated successfully redirect home page req.authInfo holds the auth token sent by google need to send this to the front end for authorization
+		const token = req.authInfo;
+		res.redirect(
 			url.format({
 				pathname: process.env.FRONTEND_BASE_URL,
 				query: {
 					token,
-					user: request.user,
+					user: req.user,
 				},
 			})
 		);
-		// response.status(200).json({ user: request.user, token: request.authInfo });
 	}
 );
 
 // *GET logout route - will sign person out of session currently points to hard code dashboard. Prob need to add env file for frontend url
 
-router.get("/logout", (request, response) => {
-	request.logout();
-	response.redirect(process.env.FRONTEND_BASE_URL + "/login");
+router.get("/logout", (req, res) => {
+	req.logout();
+	res.redirect(process.env.FRONTEND_BASE_URL + "/login");
 });
 
 //** Local login routes */
@@ -59,20 +58,10 @@ in the login POST route I'll have to call the local strategy
 router.post(
 	"/login",
 	passport.authenticate("local", { failureRedirect: "/login" }),
-	function (req, res) {
-		console.log("response obj", res);
+	(req, res) => {
 		const token = generateToken(req.user);
 		console.log(token);
 		res.status(200).json({ token, message: "Logged In", user: req.user });
-		// res.redirect(
-		// 	url.format({
-		// 		pathname: process.env.FRONTEND_BASE_URL,
-		// 		query: {
-		// 			token,
-		// 			user: req.user,
-		// 		},
-		// 	})
-		// );
 	}
 );
 
