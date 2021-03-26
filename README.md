@@ -8,11 +8,12 @@
 
 - Endpoints that do _**NOT**_ require authentication (Not Protected):
 
-| Requests                                    | Endpoints                            | Description                                                                 |
-| ------------------------------------------- | ------------------------------------ | --------------------------------------------------------------------------- |
-| <a href="#baseUrl">GET Base URL</a>         | https://leitspeed-api.herokuapp.com/ | Attach endpoints to the end of the base URL in order to make HTTP Requests. |
-| <a href="#googleLogin">GET google login</a> | /auth/google                         | <b>GET</b> request to register and login new user useing Google email       |
-| <a href="#googleLogin">GET google login</a> | /auth/google                         | <b>GET</b> request to register and login new user useing Google email       |
+| Requests                                         | Endpoints                            | Description                                                                 |
+| ------------------------------------------------ | ------------------------------------ | --------------------------------------------------------------------------- |
+| <a href="#baseUrl">GET Base URL</a>              | https://leitspeed-api.herokuapp.com/ | Attach endpoints to the end of the base URL in order to make HTTP Requests. |
+| <a href="#googleLogin">GET google login</a>      | /auth/google                         | <b>GET</b> request to register and login new user using Google email        |
+| <a href="#localRegister">POST local register</a> | /auth/register                       | <b>POST</b> request to register new user using passport local strategy      |
+| <a href="#localLogin">POST local login</a>       | /auth/login                          | <b>POST</b> request to login new user user using passport local strategy    |
 
 <hr>
 
@@ -61,6 +62,33 @@ If the deployment is up, you will receive a simple message - `"Up and running...
 **[GET] Login For Google User**
 
 The `/auth/google` GET request to the [https://leitspeed-api.herokuapp.com/auth/google](https://leitspeed-api.herokuapp.com/auth/google) endpoint.
+
+![goole login pop up window](https://i.stack.imgur.com/N5v1U.png)
+
+<div id="googleLogin"></div>
+<a href="#top">Return to the top</a>
+
+**[POST] Register user with Local passport strategy**
+
+The `/auth/register` POST request to the [https://leitspeed-api.herokuapp.com/auth/register](https://leitspeed-api.herokuapp.com/auth/google) endpoint.
+
+### Request body should include:
+
+| Input (Case Sensitive) | Input Type             |
+| ---------------------- | ---------------------- |
+| name (required)        | string (4+ characters) |
+| password (required)    | string (4+ characters) |
+| email (NOT-required)   | string                 |
+
+_An example of how the body should appear:_
+
+```js
+{
+    "username": "exampleuser",
+    "password": "exampleuser",
+    "email": "exampleuser@gmail.com"
+}
+```
 
 ![goole login pop up window](https://i.stack.imgur.com/N5v1U.png)
 

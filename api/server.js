@@ -64,20 +64,31 @@ server.use("/topics", topicsRouter);
 // 	res.render("register.ejs");
 // });
 
-// server.post("/register", async (req, res) => {
-// 	try {
-// 		const hashedPassword = await bcrypt.hash(req.body.password, 10);
-// 		users.add({
-// 			name: req.body.name,
-// 			username: req.body.username,
-// 			password: hashedPassword,
-// 			email: req.body.email,
-// 		});
-// 		res.redirect("/login");
-// 	} catch {
-// 		res.redirect("/register");
-// 	}
-// });
+server.post("/register", async (req, res) => {
+	const user = req.body;
+	const hashedPassword = await bcrypt.hash(req.body.password, 10);
+	user.password = hashedPassword;
+	users
+		.add(user)
+		.then((addedUser) => {
+			res.status(200).json(addedUser, "imatoken");
+		})
+		.catch((error) => {
+			res.status(500).json({ error: errror.message });
+		});
+	// try {
+	// 	const hashedPassword = await bcrypt.hash(req.body.password, 10);
+	// 	users.add({
+	// 		name: req.body.name,
+	// 		username: req.body.username,
+	// 		password: hashedPassword,
+	// 		email: req.body.email,
+	// 	});
+	// 	res.redirect("/login");
+	// } catch {
+	// 	res.redirect("/register");
+	// }
+});
 
 // //TODO now... to tackle login
 // server.get("/login", (req, res) => {

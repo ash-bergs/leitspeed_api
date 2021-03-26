@@ -3,16 +3,12 @@
 //* create an instance of an express router
 const express = require("express");
 const router = express.Router();
+const Users = require("./users-model");
+const bcrypt = require("bcrypt");
 // const googleAuth = require("../../passport-config");
-const { initialize, passport } = require("../../passport-config");
+const { passport } = require("../../passport-config");
 
-router.get("/login", (request, response) => {
-	// response.render("login", { user: request.user });
-	console.log(response);
-	response.redirect("https://leitspeed-fe.vercel.app/login");
-});
-
-// GET route for when you click on login - passport authenticates through google
+//* GET route for when you click on login - passport authenticates through google
 router.get(
 	"/google",
 	passport.authenticate("google", {
@@ -27,9 +23,7 @@ router.get(
 		failureRedirect: "/login",
 	}),
 	(request, response) => {
-		console.log("req object++++++++++++++++++++++++", request.authInfo);
 		//* Authenticated successfully redirect home page authInfo holds the auth token sent by google need to send this to the front end for authorization
-
 		response.redirect("https://leitspeed-fe.vercel.app/");
 	}
 );
@@ -42,6 +36,15 @@ router.get("/logout", (request, response) => {
 });
 
 //** Local login routes */
+
+/* ------------------------------- About Login ------------------------------ */
+/*
+Passport is essentially another piece of middleware, like Express.. 
+If It's set up in server.js I need to pass Passport to this users router 
+in the login POST route I'll have to call the local strategy 
+*/
+/* -------------------------------------------------------------------------- */
+
 router.post(
 	"/login",
 	passport.authenticate("local", {
@@ -52,17 +55,18 @@ router.post(
 );
 
 router.post("/register", async (req, res) => {
-	try {
-		const hashedPassword = await bcrypt.hash(req.body.password, 10);
-		users.add({
-			name: req.body.name,
-			username: req.body.username,
-			password: hashedPassword,
-			email: req.body.email,
+	const user = req.body;
+	const hashedPassword = await bcrypt.hash(req.body.password, 10);
+	user.password = hashedPassword;
+	console.log(user);
+	Users.add(user)
+		.then((addedUser) => {
+			console.log(addedUser);
+			res.status(200).json({ addedUser });
+		})
+		.catch((error) => {
+			res.status(500).json({ error: error.message });
 		});
-		res.redirect("/login");
-	} catch {
-		res.redirect("/register");
-	}
 });
+
 module.exports = router;

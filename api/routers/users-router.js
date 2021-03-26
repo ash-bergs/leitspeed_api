@@ -60,24 +60,6 @@ router.post("/register", (req, res) => {
 	}
 });
 
-/* ------------------------------- About Login ------------------------------ */
-/*
-Passport is essentially another piece of middleware, like Express.. 
-If It's set up in server.js I need to pass Passport to this users router 
-in the login POST route I'll have to call the local strategy 
-*/
-/* -------------------------------------------------------------------------- */
-
-router.post(
-	"/login",
-	passport.authenticate("local", {
-		// a list of options that we want to modify
-		successRedirect: "/",
-		failureRedirect: "/login",
-		failureFlash: true,
-	})
-);
-
 /* --------------------------- Note on Middleware --------------------------- */
 //* We could use a handleError function to handle errors, perhaps logging them, and pass it to the catch clause.
 //TODO [🦄] Make this more robust, handle saving errors somewhere to see later? How can I do that?
