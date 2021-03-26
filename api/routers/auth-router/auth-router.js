@@ -26,15 +26,23 @@ router.get(
 	(req, res) => {
 		//* Authenticated successfully redirect home page req.authInfo holds the auth token sent by google need to send this to the front end for authorization
 		const token = req.authInfo;
-		res.redirect(
-			url.format({
-				pathname: process.env.FRONTEND_BASE_URL,
-				query: {
-					token,
-					user: req.user,
-				},
-			})
-		);
+		console.log(req.user);
+
+		const user = {
+			googleId: req.user.id,
+			username: req.user.name.familyName,
+			name: req.user.given_name,
+		};
+		res.status(200).json({ token, user: user });
+		// res.redirect(
+		// 	url.format({
+		// 		pathname: process.env.FRONTEND_BASE_URL,
+		// 		query: {
+		// 			token,
+		// 			user: req.user,
+		// 		},
+		// 	})
+		// );
 	}
 );
 
@@ -60,7 +68,7 @@ router.post(
 	passport.authenticate("local", { failureRedirect: "/login" }),
 	(req, res) => {
 		const token = generateToken(req.user);
-		res.status(200).json({ token, message: "Logged In", user: req.user });
+		res.status(200).json({ token, user: req.user });
 	}
 );
 

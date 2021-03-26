@@ -78,15 +78,15 @@ The `/auth/register` POST request to the [https://leitspeed-api.herokuapp.com/au
 | ---------------------- | ---------------------- |
 | name (required)        | string (4+ characters) |
 | password (required)    | string (4+ characters) |
-| email (NOT-required)   | string                 |
+| username (required)    | string (4+ characters) |
 
 _An example of how the body should appear:_
 
 ```js
 {
-	"name": "test33",
-	"username": "test33",
-	"password": "test33"
+	"name": "thad",
+	"username": "thadland",
+	"password": "castle"
 }
 ```
 
@@ -96,12 +96,13 @@ _You will receive the user object an a JWT._
 
 ```js
 {
-  "addedUser": {
-    "id": 6,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJ0aGFkbGFuZCIsImlhdCI6MTYxNjc5OTU0MywiZXhwIjoxNjE2OTcyMzQzfQ.F2Hz8i3HARFoH8-lDMqSjtYmnFzlcaAL5XXwN1IYmVE",
+  "user": {
+    "id": 8,
     "googleId": null,
-    "name": "test33",
-    "username": "test33",
-    "password": "$2b$10$LeUqQdWrFynuLV8SbGJdcuPN1fDZQlv7G77AMYGuf6T5q.MqWrDKO",
+    "name": "thad",
+    "username": "thadland",
+    "password": "$2b$10$sbEwKBZErLUL/8.OU9Odz.2RTr3BBnNqxlSmyllFojPDVo32bDt9e",
     "email": null
   }
 }
@@ -124,8 +125,8 @@ _An example of how the body should appear:_
 
 ```js
 {
-	"username": "test33",
-	"password": "test33"
+	"username": "thadland",
+	"password": "castle"
 }
 ```
 
@@ -134,7 +135,17 @@ _An example of how the body should appear:_
 _You will receive the user object and a JWT._
 
 ```js
-need to update login endpoint to send token and user back
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwidXNlcm5hbWUiOiJ0aGFkbGFuZCIsImlhdCI6MTYxNjc5OTY1NSwiZXhwIjoxNjE2OTcyNDU1fQ.jrXJUNJG2-_8QRGOvgzZZ9aWYfFUxqihjnx88zVZduQ",
+  "user": {
+    "id": 8,
+    "googleId": null,
+    "name": "thad",
+    "username": "thadland",
+    "password": "$2b$10$sbEwKBZErLUL/8.OU9Odz.2RTr3BBnNqxlSmyllFojPDVo32bDt9e",
+    "email": null
+  }
+}
 ```
 
 ## API Endpoints
