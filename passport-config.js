@@ -19,7 +19,6 @@ passport.use(
 				name: profile.name.givenName,
 				username: profile.name.familyName,
 			};
-			// console.log("-------------------New user", newUser);
 			//* Query the database to find user record associated with this
 			//* google profile, then pass that object to done callback passing the token down as well on found profile probably need to do the same on new user
 
