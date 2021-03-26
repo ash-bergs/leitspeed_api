@@ -49,7 +49,7 @@ server.use(
 server.use(passport.initialize());
 //*google auth and local initialization ^^^^^
 // configures passport to use express-sessions config object
-server.use(passport.session());
+// server.use(passport.session());
 
 //* "Plug in" the routers here
 server.use("/auth", authRouter);

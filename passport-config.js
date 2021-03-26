@@ -12,7 +12,6 @@ passport.use(
 			callbackURL: "/auth/google/callback",
 		},
 		(accessToken, refreshToken, profile, done) => {
-			console.log("profile", accessToken);
 			//* create new user object from profile obj response from google maybe move this to the else block no sense in creating user object for user already in db
 
 			const newUser = {
@@ -25,7 +24,6 @@ passport.use(
 			//* google profile, then pass that object to done callback passing the token down as well on found profile probably need to do the same on new user
 
 			Users.findByGoogleId(profile.id).then((id) => {
-				// console.log("+++++++++++++++++++", id);
 				if (id) {
 					return done(null, profile, accessToken);
 				} else {

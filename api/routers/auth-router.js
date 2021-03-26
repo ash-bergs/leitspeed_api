@@ -5,8 +5,8 @@ const express = require("express");
 const router = express.Router();
 const Users = require("./users-model");
 const bcrypt = require("bcrypt");
-// const googleAuth = require("../../passport-config");
 const { passport } = require("../../passport-config");
+const url = require("url");
 
 //* GET route for when you click on login - passport authenticates through google
 router.get(
@@ -23,8 +23,18 @@ router.get(
 		failureRedirect: process.env.FRONTEND_BASE_URL + "/login",
 	}),
 	(request, response) => {
-		//* Authenticated successfully redirect home page authInfo holds the auth token sent by google need to send this to the front end for authorization
-		response.redirect(process.env.FRONTEND_BASE_URL);
+		//* Authenticated successfully redirect home page request.authInfo holds the auth token sent by google need to send this to the front end for authorization
+		const token = request.authInfo;
+		response.redirect(
+			url.format({
+				pathname: process.env.FRONTEND_BASE_URL,
+				query: {
+					token,
+					user: request.user,
+				},
+			})
+		);
+		// response.status(200).json({ user: request.user, token: request.authInfo });
 	}
 );
 
