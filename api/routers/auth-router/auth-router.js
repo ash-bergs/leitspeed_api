@@ -60,7 +60,6 @@ router.post(
 	passport.authenticate("local", { failureRedirect: "/login" }),
 	(req, res) => {
 		const token = generateToken(req.user);
-		console.log(token);
 		res.status(200).json({ token, message: "Logged In", user: req.user });
 	}
 );
@@ -69,11 +68,10 @@ router.post("/register", async (req, res) => {
 	const user = req.body;
 	const hashedPassword = await bcrypt.hash(req.body.password, 10);
 	user.password = hashedPassword;
-	console.log(user);
+
 	Users.add(user)
 		.then((addedUser) => {
 			const token = generateToken(addedUser);
-			console.log(addedUser);
 			res.status(201).json({ token: token, user: addedUser });
 		})
 		.catch((error) => {
