@@ -65,12 +65,12 @@ The `/auth/google` GET request to the [https://leitspeed-api.herokuapp.com/auth/
 
 ![goole login pop up window](https://i.stack.imgur.com/N5v1U.png)
 
-<div id="googleLogin"></div>
+<div id="localRegister"></div>
 <a href="#top">Return to the top</a>
 
 **[POST] Register user with Local passport strategy**
 
-The `/auth/register` POST request to the [https://leitspeed-api.herokuapp.com/auth/register](https://leitspeed-api.herokuapp.com/auth/google) endpoint.
+The `/auth/register` POST request to the [https://leitspeed-api.herokuapp.com/auth/register](https://leitspeed-api.herokuapp.com/auth/register) endpoint.
 
 ### Request body should include:
 
@@ -84,13 +84,58 @@ _An example of how the body should appear:_
 
 ```js
 {
-    "username": "exampleuser",
-    "password": "exampleuser",
-    "email": "exampleuser@gmail.com"
+	"name": "test33",
+	"username": "test33",
+	"password": "test33"
 }
 ```
 
-![goole login pop up window](https://i.stack.imgur.com/N5v1U.png)
+### What will be returned:
+
+_You will receive the user object an a JWT._
+
+```js
+{
+  "addedUser": {
+    "id": 6,
+    "googleId": null,
+    "name": "test33",
+    "username": "test33",
+    "password": "$2b$10$LeUqQdWrFynuLV8SbGJdcuPN1fDZQlv7G77AMYGuf6T5q.MqWrDKO",
+    "email": null
+  }
+}
+```
+
+<div id="localLogin"></div>
+<a href="#top">Return to the top</a>
+
+**[POST] Login user with Local passport strategy**
+The `/auth/login` POST request to the [https://leitspeed-api.herokuapp.com/auth/login](https://leitspeed-api.herokuapp.com/auth/login) endpoint.
+
+### Request body should include:
+
+| Input (Case Sensitive) | Input Type             |
+| ---------------------- | ---------------------- |
+| username (required)    | string (4+ characters) |
+| password (required)    | string (4+ characters) |
+
+_An example of how the body should appear:_
+
+```js
+{
+	"username": "test33",
+	"password": "test33"
+}
+```
+
+### What will be returned:
+
+_You will receive the user object and a JWT._
+
+```js
+need to update login endpoint to send token and user back
+```
 
 ## API Endpoints
 
