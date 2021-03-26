@@ -11,12 +11,15 @@ const bcrypt = require("bcrypt");
 
 //! passport
 // ? do these need to be moved after the routers??
-const passport = require("passport");
+
 const flash = require("express-flash");
 const session = require("express-session");
-const initializePassport = require("../passport-config");
-const googleAuth = require("../passport-google");
-initializePassport(passport);
+//* importing both local and goolge strategy. google was written into passport so just passing passport instead of googleAuth
+//* could probably just use passport.localstrat and just export passport
+const { initialize, passport } = require("../passport-config");
+
+//*initializing the local strategy with passport.. could be eliminated
+initialize(passport);
 
 //*google auth routes are on authRouter
 const authRouter = require("./routers/auth-router");
@@ -28,7 +31,7 @@ const server = express();
 
 //* use JSON //
 server.use(express.json());
-server.set("view-engine", "ejs");
+// server.set("view-engine", "ejs");
 server.use(express.urlencoded({ extended: false }));
 server.use(flash());
 server.use(
@@ -41,14 +44,11 @@ server.use(
 	})
 );
 
-//* there is probably a better way to initialize or use the local and google stategies
-server.use(googleAuth.passport.initialize());
-//*google auth initialization ^^^^^
 // initialize is a function inside Passport library - see thread: https://stackoverflow.com/questions/46644366/what-is-passport-initialize-nodejs-express
-
 server.use(passport.initialize());
+//*google auth and local initialization ^^^^^
 // configures passport to use express-sessions config object
-server.use(passport.session());
+// server.use(passport.session());
 
 //* "Plug in" the routers here
 server.use("/auth", authRouter);
@@ -56,47 +56,9 @@ server.use("/cards", cardsRouter);
 server.use("/users", usersRouter);
 server.use("/topics", topicsRouter);
 
-// adding to the spaghetti code with some shot-in-the-dark endpoints to test passport
-// GET register
-//* the REGISTER end points seem to be working! a user is added with a hashed password
-server.get("/register", (req, res) => {
-	res.render("register.ejs");
-});
-
-server.post("/register", async (req, res) => {
-	try {
-		const hashedPassword = await bcrypt.hash(req.body.password, 10);
-		users.add({
-			name: req.body.name,
-			username: req.body.username,
-			password: hashedPassword,
-			email: req.body.email,
-		});
-		res.redirect("/login");
-	} catch {
-		res.redirect("/register");
-	}
-});
-
-//TODO now... to tackle login
-server.get("/login", (req, res) => {
-	res.render("login.ejs");
-});
-
-// we'll call passport to handle a login! see passport-config if curious what it's up to
-server.post(
-	"/login",
-	passport.authenticate("local", {
-		successRedirect: "/",
-		failureRedirect: "/login",
-		failureFlash: true,
-	})
-);
-
 //* base endpoint
 server.get("/", (req, res) => {
-	res.render("index.ejs");
-	//res.status(200).json({ message: "Up and Running..."});
+	res.status(200).json({ message: "Up and Running..." });
 });
 
 module.exports = server;

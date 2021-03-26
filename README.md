@@ -1,16 +1,30 @@
 # LeitSpeed API
 
+<div id="top"></div>
+
+## Table of Contents
+
+## User registration and login
+
+- Endpoints that do _**NOT**_ require authentication (Not Protected):
+
+| Requests                                         | Endpoints                            | Description                                                                 |
+| ------------------------------------------------ | ------------------------------------ | --------------------------------------------------------------------------- |
+| <a href="#baseUrl">GET Base URL</a>              | https://leitspeed-api.herokuapp.com/ | Attach endpoints to the end of the base URL in order to make HTTP Requests. |
+| <a href="#googleLogin">GET google login</a>      | /auth/google                         | <b>GET</b> request to register and login new user using Google email        |
+| <a href="#localRegister">POST local register</a> | /auth/register                       | <b>POST</b> request to register new user using passport local strategy      |
+| <a href="#localLogin">POST local login</a>       | /auth/login                          | <b>POST</b> request to login new user user using passport local strategy    |
+
+<hr>
+
+## Card endpoints
+
+| Requests                                       | Endpoints  | Description                                           |
+| ---------------------------------------------- | ---------- | ----------------------------------------------------- |
+| <a href="#getCards">GET all cards</a>          | /cards     | <b>GET</b> request to get all cards from the database |
+| <a href="#getCardById">GET card by card_id</a> | /cards/:id | <b>GET</b> request to get card by card_id             |
+
 The LeitSpeed API is built with NodeJS & the Express framework, and the Knex query-builder.
-
-## Contributors
-
-| [<img alt="ashley-bergsma" src="https://avatars.githubusercontent.com/u/65979049?v=4&s=117 width=117">](https://github.com/ashley-bergsma) |
-| :----------------------------------------------------------------------------------------------------------------------------------------: |
-|                                            [ashley-bergsma](https://github.com/ashley-bergsma)                                             |
-
-| [<img alt="HarrisonMS" src="https://avatars.githubusercontent.com/u/54726103?v=4&s=117 width=117">](https://github.com/HarrisonMS) |
-| :--------------------------------------------------------------------------------------------------------------------------------: |
-|                                            [HarrisonMS](https://github.com/HarrisonMS)                                             |
 
 ## Tech Stack
 
@@ -30,6 +44,8 @@ Dev Dependencies:
 
 ## Using the API
 
+<div id="baseUrl"></div>
+
 **BASE URL**
 
 The api can be accessed via the base url at [https://leitspeed-api.herokuapp.com/](https://leitspeed-api.herokuapp.com/)
@@ -38,7 +54,94 @@ If the deployment is up, you will receive a simple message - `"Up and running...
 
 ![Base url in Insomnia](https://i.ibb.co/gWpHMGq/leitspeed-base-URL.jpg)
 
+## Auth endpoints
+
+<div id="googleLogin"></div>
+<a href="#top">Return to the top</a>
+
+**[GET] Login For Google User**
+
+The `/auth/google` GET request to the [https://leitspeed-api.herokuapp.com/auth/google](https://leitspeed-api.herokuapp.com/auth/google) endpoint.
+
+![goole login pop up window](https://i.stack.imgur.com/N5v1U.png)
+
+<div id="localRegister"></div>
+<a href="#top">Return to the top</a>
+
+**[POST] Register user with Local passport strategy**
+
+The `/auth/register` POST request to the [https://leitspeed-api.herokuapp.com/auth/register](https://leitspeed-api.herokuapp.com/auth/register) endpoint.
+
+### Request body should include:
+
+| Input (Case Sensitive) | Input Type             |
+| ---------------------- | ---------------------- |
+| name (required)        | string (4+ characters) |
+| password (required)    | string (4+ characters) |
+| email (NOT-required)   | string                 |
+
+_An example of how the body should appear:_
+
+```js
+{
+	"name": "test33",
+	"username": "test33",
+	"password": "test33"
+}
+```
+
+### What will be returned:
+
+_You will receive the user object an a JWT._
+
+```js
+{
+  "addedUser": {
+    "id": 6,
+    "googleId": null,
+    "name": "test33",
+    "username": "test33",
+    "password": "$2b$10$LeUqQdWrFynuLV8SbGJdcuPN1fDZQlv7G77AMYGuf6T5q.MqWrDKO",
+    "email": null
+  }
+}
+```
+
+<div id="localLogin"></div>
+<a href="#top">Return to the top</a>
+
+**[POST] Login user with Local passport strategy**
+The `/auth/login` POST request to the [https://leitspeed-api.herokuapp.com/auth/login](https://leitspeed-api.herokuapp.com/auth/login) endpoint.
+
+### Request body should include:
+
+| Input (Case Sensitive) | Input Type             |
+| ---------------------- | ---------------------- |
+| username (required)    | string (4+ characters) |
+| password (required)    | string (4+ characters) |
+
+_An example of how the body should appear:_
+
+```js
+{
+	"username": "test33",
+	"password": "test33"
+}
+```
+
+### What will be returned:
+
+_You will receive the user object and a JWT._
+
+```js
+need to update login endpoint to send token and user back
+```
+
 ## API Endpoints
+
+<div id="getCards"></div>
+
+<a href="#top">Return to the top</a>
 
 **/CARDS - GET all Cards - endpoint**
 
@@ -49,6 +152,10 @@ The response will be an array of objects - each object being an individual card 
 ![Cards endpoint in Insomnia](https://i.ibb.co/7y08rcv/leitspeed-cards-URL.jpg)
 
 ---
+
+<div id="getCardById"></div>
+
+<a href="#top">Return to the top</a>
 
 **/CARDS/{id} - GET card by card ID - endpoint**
 
@@ -109,3 +216,13 @@ The server will respond with the newly updated card object.
 ### Database Design Overview
 
 🚧 UNDER CONSTRUCTION 🚧
+
+## Contributors
+
+| [<img alt="ashley-bergsma" src="https://avatars.githubusercontent.com/u/65979049?v=4&s=117 width=117">](https://github.com/ashley-bergsma) |
+| :----------------------------------------------------------------------------------------------------------------------------------------: |
+|                                            [ashley-bergsma](https://github.com/ashley-bergsma)                                             |
+
+| [<img alt="HarrisonMS" src="https://avatars.githubusercontent.com/u/54726103?v=4&s=117 width=117">](https://github.com/HarrisonMS) |
+| :--------------------------------------------------------------------------------------------------------------------------------: |
+|                                            [HarrisonMS](https://github.com/HarrisonMS)                                             |
