@@ -3,7 +3,7 @@
 //* create an instance of an express router
 const express = require("express");
 const router = express.Router();
-const googleAuth = require("../../passport-google");
+const googleAuth = require("../../passport-config");
 
 router.get("/login", (request, response) => {
 	// response.render("login", { user: request.user });

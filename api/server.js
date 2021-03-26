@@ -11,12 +11,15 @@ const bcrypt = require("bcrypt");
 
 //! passport
 // ? do these need to be moved after the routers??
-const passport = require("passport");
+
 const flash = require("express-flash");
 const session = require("express-session");
-const initializePassport = require("../passport-config");
-const googleAuth = require("../passport-google");
-initializePassport(passport);
+//* importing both local and goolge strategy. google was written into passport so just passing passport instead of googleAuth
+//* could probably just use passport.localstrat and just export passport
+const { initialize, passport } = require("../passport-config");
+
+//*initializing the local strategy with passport.. could be eliminated
+initialize(passport);
 
 //*google auth routes are on authRouter
 const authRouter = require("./routers/auth-router");
@@ -41,12 +44,10 @@ server.use(
 	})
 );
 
-//* there is probably a better way to initialize or use the local and google stategies
-server.use(googleAuth.passport.initialize());
-//*google auth initialization ^^^^^
 // initialize is a function inside Passport library - see thread: https://stackoverflow.com/questions/46644366/what-is-passport-initialize-nodejs-express
 
 server.use(passport.initialize());
+//*google auth and local initialization ^^^^^
 // configures passport to use express-sessions config object
 server.use(passport.session());
 
