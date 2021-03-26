@@ -22,7 +22,7 @@ const { initialize, passport } = require("../passport-config");
 initialize(passport);
 
 //*google auth routes are on authRouter
-const authRouter = require("./routers/auth-router");
+const authRouter = require("./routers/auth-router/auth-router");
 
 const cardsRouter = require("./routers/cards-router/cards-router");
 const usersRouter = require("./routers/users-router");

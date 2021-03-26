@@ -3,9 +3,10 @@
 //* create an instance of an express router
 const express = require("express");
 const router = express.Router();
-const Users = require("./users-model");
+const Users = require("../users-model");
 const bcrypt = require("bcrypt");
-const { passport } = require("../../passport-config");
+const { passport } = require("../../../passport-config");
+const generateToken = require("./generateToken");
 const url = require("url");
 
 //* GET route for when you click on login - passport authenticates through google
@@ -54,14 +55,25 @@ If It's set up in server.js I need to pass Passport to this users router
 in the login POST route I'll have to call the local strategy 
 */
 /* -------------------------------------------------------------------------- */
-console.log(process.env.FRONTEND_BASE_URL + "/login");
+
 router.post(
 	"/login",
-	passport.authenticate("local", {
-		successRedirect: process.env.FRONTEND_BASE_URL,
-		failureRedirect: process.env.FRONTEND_BASE_URL + "/login",
-		failureFlash: true,
-	})
+	passport.authenticate("local", { failureRedirect: "/login" }),
+	function (req, res) {
+		console.log("response obj", res);
+		const token = generateToken(req.user);
+		console.log(token);
+		res.status(200).json({ token, message: "Logged In", user: req.user });
+		// res.redirect(
+		// 	url.format({
+		// 		pathname: process.env.FRONTEND_BASE_URL,
+		// 		query: {
+		// 			token,
+		// 			user: req.user,
+		// 		},
+		// 	})
+		// );
+	}
 );
 
 router.post("/register", async (req, res) => {
@@ -71,8 +83,9 @@ router.post("/register", async (req, res) => {
 	console.log(user);
 	Users.add(user)
 		.then((addedUser) => {
+			const token = generateToken(addedUser);
 			console.log(addedUser);
-			res.status(200).json({ addedUser });
+			res.status(201).json({ token: token, user: addedUser });
 		})
 		.catch((error) => {
 			res.status(500).json({ error: error.message });
