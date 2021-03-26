@@ -4,7 +4,7 @@
 
 ## Table of Contents
 
-### User registration and login
+## User registration and login
 
 - Endpoints that do _**NOT**_ require authentication (Not Protected):
 
@@ -12,6 +12,16 @@
 | ------------------------------------------- | ------------------------------------ | --------------------------------------------------------------------------- |
 | <a href="#baseUrl">GET Base URL</a>         | https://leitspeed-api.herokuapp.com/ | Attach endpoints to the end of the base URL in order to make HTTP Requests. |
 | <a href="#googleLogin">GET google login</a> | /auth/google                         | <b>GET</b> request to register and login new user useing Google email       |
+| <a href="#googleLogin">GET google login</a> | /auth/google                         | <b>GET</b> request to register and login new user useing Google email       |
+
+<hr>
+
+## Card endpoints
+
+| Requests                                       | Endpoints  | Description                                           |
+| ---------------------------------------------- | ---------- | ----------------------------------------------------- |
+| <a href="#getCards">GET all cards</a>          | /cards     | <b>GET</b> request to get all cards from the database |
+| <a href="#getCardById">GET card by card_id</a> | /cards/:id | <b>GET</b> request to get card by card_id             |
 
 The LeitSpeed API is built with NodeJS & the Express framework, and the Knex query-builder.
 
@@ -56,6 +66,10 @@ The `/auth/google` GET request to the [https://leitspeed-api.herokuapp.com/auth/
 
 ## API Endpoints
 
+<div id="getCards"></div>
+
+<a href="#top">Return to the top</a>
+
 **/CARDS - GET all Cards - endpoint**
 
 The `Cards` database table can be accessed by making a GET request to the [https://leitspeed-api.herokuapp.com/cards](https://leitspeed-api.herokuapp.com/cards) endpoint.
@@ -65,6 +79,10 @@ The response will be an array of objects - each object being an individual card 
 ![Cards endpoint in Insomnia](https://i.ibb.co/7y08rcv/leitspeed-cards-URL.jpg)
 
 ---
+
+<div id="getCardById"></div>
+
+<a href="#top">Return to the top</a>
 
 **/CARDS/{id} - GET card by card ID - endpoint**
 
